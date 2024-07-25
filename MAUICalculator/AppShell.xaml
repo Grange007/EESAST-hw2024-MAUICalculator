@@ -8,7 +8,7 @@
     Title="MAUICalculator">
 
     <ShellContent
-        Title="Home"
+        Title="Calculator"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
 
