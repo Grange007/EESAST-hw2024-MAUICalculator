@@ -11,13 +11,13 @@
             <ShellContent
                 Title="Basic Calculator"
                 ContentTemplate="{DataTemplate local:MainPage}"
-                Route="MainPage"/>
+                Route="MainPage" />
         </Tab>
         <Tab Title="Advanced Calculator">
             <ShellContent
                 Title="Advanced Calculator"
                 ContentTemplate="{DataTemplate local:SubPage}"
-                Route="SubPage"/>
+                Route="SubPage" />
         </Tab>
     </TabBar>
 </Shell>

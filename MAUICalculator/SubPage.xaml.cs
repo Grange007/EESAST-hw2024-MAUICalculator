@@ -5,250 +5,250 @@ public partial class SubPage : ContentPage
 	public SubPage()
 	{
 		InitializeComponent();
-        displayLabel.Text = MainPage.Source.Display;
-        lastNumberS.Text = MainPage.Source.LastNumS;
-    }
-    //Á½¸öÊµÏÖÓëÖ÷½çÃæ¹²ÏíµÄº¯Êý
-    protected override void OnAppearing()
-    {
-        base.OnAppearing();
-        displayLabel.Text = MainPage.Source.Display;
-        lastNumberS.Text = MainPage.Source.LastNumS;
-    }
-    protected override void OnDisappearing()
-    {
-        base.OnDisappearing();
-        MainPage.Source.Display = displayLabel.Text;
-        MainPage.Source.LastNumS = lastNumberS.Text;
-    }
-    // ¶¨ÒåOnNumberClicked·½·¨À´´¦ÀíÊý×Ö°´Å¥µã»÷ÊÂ¼þ
-    private void OnNumberClicked(object sender, EventArgs e)
-    {
-        //½×³ËÖ»ÄÜÓÐ×ó²àÊý
-        if(MainPage.Source.CurrentOperator != "!")
-        {
-            // »ñÈ¡°´Å¥µÄÎÄ±¾Öµ
-            var button = sender as Button;
-            var number = button.Text;
-            // Èç¹ûµ±Ç°ÏÔÊ¾µÄÊÇ½á¹û£¬»òÕßÊÇ0£¬¾ÍÏàµ±ÓÚ°´ÏÂÁËACºóÔÙÊäÈë
-            if (MainPage.Source.IsResult || displayLabel.Text == "0")
-            {
-                OnClearClicked(sender, e);
-                displayLabel.Text = "";
-                if (number == ".")
-                    displayLabel.Text = "0";
-            }
-            // ÌØÊâ×Ö·ûºó²»¿ÉÒÔ¸úÊý×Ö
-            if (displayLabel.Text != "¦Ð" && displayLabel.Text != "e")
-            {
-                if (!MainPage.Source.IsNext)
-                {
-                    displayLabel.Text += number;
-                    //ÌØÊâ×Ö·ûÇ°²»¿ÉÒÔ¸úÊý×Ö
-                    if (number == "¦Ð" || number == "e")
-                        displayLabel.Text = number;
-                }
-                //Èç¹ûÔÚÔËËã·ûÓÒ±ß£¬¾Í¶îÍâ¸³Öµ
-                else
-                {
-                    if (MainPage.Source.RhsNumberS != "¦Ð" && MainPage.Source.RhsNumberS != "e")
-                    {
-                        MainPage.Source.RhsNumberS += number;
-                        displayLabel.Text += number;
-                        if (number == "¦Ð" || number == "e")
-                        {
-                            displayLabel.Text = displayLabel.Text.Replace(MainPage.Source.RhsNumberS, ""); displayLabel.Text += number;
-                            MainPage.Source.RhsNumberS = number;
+      displayLabel.Text = MainPage.Source.Display;
+      lastNumberS.Text = MainPage.Source.LastNumS;
+  }
+  //ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ¹²ï¿½ï¿½ï¿½Äºï¿½ï¿½ï¿½
+  protected override void OnAppearing()
+  {
+      base.OnAppearing();
+      displayLabel.Text = MainPage.Source.Display;
+      lastNumberS.Text = MainPage.Source.LastNumS;
+  }
+  protected override void OnDisappearing()
+  {
+      base.OnDisappearing();
+      MainPage.Source.Display = displayLabel.Text;
+      MainPage.Source.LastNumS = lastNumberS.Text;
+  }
+  // ï¿½ï¿½ï¿½ï¿½OnNumberClickedï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö°ï¿½Å¥ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
+  private void OnNumberClicked(object sender, EventArgs e)
+  {
+      //ï¿½×³ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+      if(MainPage.Source.CurrentOperator != "!")
+      {
+          // ï¿½ï¿½È¡ï¿½ï¿½Å¥ï¿½ï¿½ï¿½Ä±ï¿½Öµ
+          var button = sender as Button;
+          var number = button.Text;
+          // ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½Ç½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½0ï¿½ï¿½ï¿½ï¿½ï¿½àµ±ï¿½Ú°ï¿½ï¿½ï¿½ï¿½ï¿½ACï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+          if (MainPage.Source.IsResult || displayLabel.Text == "0")
+          {
+              OnClearClicked(sender, e);
+              displayLabel.Text = "";
+              if (number == ".")
+                  displayLabel.Text = "0";
+          }
+          // ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ó²»¿ï¿½ï¿½Ô¸ï¿½ï¿½ï¿½ï¿½ï¿½
+          if (displayLabel.Text != "ï¿½ï¿½" && displayLabel.Text != "e")
+          {
+              if (!MainPage.Source.IsNext)
+              {
+                  displayLabel.Text += number;
+                  //ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½Ô¸ï¿½ï¿½ï¿½ï¿½ï¿½
+                  if (number == "ï¿½ï¿½" || number == "e")
+                      displayLabel.Text = number;
+              }
+              //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò±ß£ï¿½ï¿½Í¶ï¿½ï¿½â¸³Öµ
+              else
+              {
+                  if (MainPage.Source.RhsNumberS != "ï¿½ï¿½" && MainPage.Source.RhsNumberS != "e")
+                  {
+                      MainPage.Source.RhsNumberS += number;
+                      displayLabel.Text += number;
+                      if (number == "ï¿½ï¿½" || number == "e")
+                      {
+                          displayLabel.Text = displayLabel.Text.Replace(MainPage.Source.RhsNumberS, ""); displayLabel.Text += number;
+                          MainPage.Source.RhsNumberS = number;
 
-                        }
-                    }
-                }
-            }
-        }
-    }
+                      }
+                  }
+              }
+          }
+      }
+  }
 
-    // ¶¨ÒåOnOperatorClicked·½·¨À´´¦ÀíÔËËã·û°´Å¥µã»÷ÊÂ¼þ
-    private void OnOperatorClicked(object sender, EventArgs e)
-    {
-        // »ñÈ¡°´Å¥µÄÎÄ±¾Öµ
-        var button = sender as Button;
-        var op = button.Text;
-        // Èç¹ûÃ»ÓÐÓÒ²àÊý£¬¾Í°´Ë«Ä¿ÔËËãÀ´
-        if (MainPage.Source.RhsNumberS == "")
-        {
-            // Èç¹ûµ±Ç°µÄÔËËã·û²»Îª¿Õ£¬¾ÍÉ¾È¥Ö®Ç°µÄ×Ö·û
-            if (MainPage.Source.IsNext)
-                displayLabel.Text = displayLabel.Text.Substring(0, displayLabel.Text.Length - 1);
-            // ·ñÔò£¬¾Í½«Êý×Ö´«¸ølastNumber£¬²¢½«ÉèÖÃboolÖµÎªtrue±íÊ¾¿ªÊ¼ÊäÈëÓÒ²àÊý×Ö
-            else if (displayLabel.Text != "")
-            {
-                if (displayLabel.Text == "¦Ð")
-                    MainPage.Source.LastNumber = Math.PI;
-                else if (displayLabel.Text == "e")
-                    MainPage.Source.LastNumber = Math.E;
-                else 
-                    MainPage.Source.LastNumber = double.Parse(displayLabel.Text);
-                MainPage.Source.IsResult = false;
-                MainPage.Source.IsNext = true;
-            }
-            // ´ËÇé¿öÎªÔÚ°´ÁË"="»ñÈ¡½á¹ûºóÔÙ°´DEL£¬ÏÔÊ¾ÆÁ±»Çå¿Õµ«ÊÇ½á¹û²»±»¸Ä±äµÄÇé¿ö
-            else
-            {
-                MainPage.Source.IsResult = false;
-                MainPage.Source.IsNext = true;
-            }
-        }
-        // Èç¹ûÓÐÓÒ²àÊý£¬ÔòÖ±½ÓÔËËãºóÔÙÓÃ½á¹û¸ø
-        else
-        {
-            OnEqualClicked(sender, e);
-            MainPage.Source.IsResult = false;
-            MainPage.Source.IsNext = true;
-        }
-        // ¸üÐÂÔËËã·û
-        displayLabel.Text += op;
-        // ½«µ±Ç°Ñ¡ÔñµÄÔËËã·û¸³Öµ¸ø±äÁ¿
-        MainPage.Source.CurrentOperator = op;
-    }
-    
-    //¶¨ÒåOnSpecialOperatorClicked´¦Àísin¡¢cosµÈÌØÊâÔËËã·û°´Å¥µã»÷ÊÂ¼þ
-    private void OnSpecialOperatorClicked(object sender, EventArgs e)
-    {
-        //¸ÃÔËËã·ûÖ»ÄÜÔËËãÒ»¸öÊý
-        if(MainPage.Source.IsResult||displayLabel.Text == "")
-        {
-            var button = sender as Button;
-            var op = button.Text;
-            displayLabel.Text = op;
-            MainPage.Source.CurrentOperator = op;
-            MainPage.Source.IsNext = true;
-            MainPage.Source.IsResult = false;
-        }
-    }
+  // ï¿½ï¿½ï¿½ï¿½OnOperatorClickedï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å¥ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
+  private void OnOperatorClicked(object sender, EventArgs e)
+  {
+      // ï¿½ï¿½È¡ï¿½ï¿½Å¥ï¿½ï¿½ï¿½Ä±ï¿½Öµ
+      var button = sender as Button;
+      var op = button.Text;
+      // ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Ò²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½Ë«Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+      if (MainPage.Source.RhsNumberS == "")
+      {
+          // ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½Õ£ï¿½ï¿½ï¿½É¾È¥Ö®Ç°ï¿½ï¿½ï¿½Ö·ï¿½
+          if (MainPage.Source.IsNext)
+              displayLabel.Text = displayLabel.Text.Substring(0, displayLabel.Text.Length - 1);
+          // ï¿½ï¿½ï¿½ò£¬¾Í½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ï¿½ï¿½lastNumberï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½boolÖµÎªtrueï¿½ï¿½Ê¾ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½Ò²ï¿½ï¿½ï¿½ï¿½ï¿½
+          else if (displayLabel.Text != "")
+          {
+              if (displayLabel.Text == "ï¿½ï¿½")
+                  MainPage.Source.LastNumber = Math.PI;
+              else if (displayLabel.Text == "e")
+                  MainPage.Source.LastNumber = Math.E;
+              else 
+                  MainPage.Source.LastNumber = double.Parse(displayLabel.Text);
+              MainPage.Source.IsResult = false;
+              MainPage.Source.IsNext = true;
+          }
+          // ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½Ú°ï¿½ï¿½ï¿½"="ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù°ï¿½DELï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õµï¿½ï¿½Ç½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½ï¿½ï¿½
+          else
+          {
+              MainPage.Source.IsResult = false;
+              MainPage.Source.IsNext = true;
+          }
+      }
+      // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã½ï¿½ï¿½ï¿½ï¿½
+      else
+      {
+          OnEqualClicked(sender, e);
+          MainPage.Source.IsResult = false;
+          MainPage.Source.IsNext = true;
+      }
+      // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+      displayLabel.Text += op;
+      // ï¿½ï¿½ï¿½ï¿½Ç°Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+      MainPage.Source.CurrentOperator = op;
+  }
 
-    // ¶¨ÒåOnEqualClicked·½·¨À´´¦ÀíµÈºÅ°´Å¥µã»÷ÊÂ¼þ
-    private void OnEqualClicked(object sender, EventArgs e)
-    {
-        // Èç¹ûµ±Ç°Ñ¡ÔñµÄÔËËã·û²»Îª¿Õ£¬¾ÍÖ´ÐÐÉÏÒ»´ÎÑ¡ÔñµÄÔËËã£¬²¢ÏÔÊ¾½á¹û
-        if (MainPage.Source.IsNext && (MainPage.Source.RhsNumberS != "" || MainPage.Source.CurrentOperator == "!"))
-        {
-            if(MainPage.Source.CurrentOperator != "!")
-            {
-                if (MainPage.Source.RhsNumberS == "¦Ð")
-                    MainPage.Source.CurrentNumber = Math.PI;
-                else if (MainPage.Source.RhsNumberS == "e")
-                    MainPage.Source.CurrentNumber = Math.E;
-                else
-                    MainPage.Source.CurrentNumber = double.Parse(MainPage.Source.RhsNumberS);
-            }
-            Calculate();
-            displayLabel.Text = MainPage.Source.LastNumber.ToString();
-            lastNumberS.Text = MainPage.Source.LastNumber.ToString();
-            MainPage.Source.IsResult = true;
-            MainPage.Source.IsNext = false;
-            MainPage.Source.CurrentOperator = "";
-            MainPage.Source.RhsNumberS = "";
-            MainPage.Source.CurrentNumber = 0;
-        }
-    }
+  //ï¿½ï¿½ï¿½ï¿½OnSpecialOperatorClickedï¿½ï¿½ï¿½ï¿½sinï¿½ï¿½cosï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å¥ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
+  private void OnSpecialOperatorClicked(object sender, EventArgs e)
+  {
+      //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½
+      if(MainPage.Source.IsResult||displayLabel.Text == "")
+      {
+          var button = sender as Button;
+          var op = button.Text;
+          displayLabel.Text = op;
+          MainPage.Source.CurrentOperator = op;
+          MainPage.Source.IsNext = true;
+          MainPage.Source.IsResult = false;
+      }
+  }
 
-    // ¶¨ÒåOnDeleteClicked·½·¨À´´¦ÀíÉ¾³ý°´Å¥µã»÷ÊÂ¼þ
-    private void OnDeleteClicked(object sender, EventArgs e)
-    {
-        //Èç¹ûÊÇ½á¹ûÔòÖ±½ÓÇåÆÁ,µ«ÊÇ¼ÙÉèÒÑ¾­ÓÐÁËÊý×Ö
-        if (MainPage.Source.IsResult)
-            displayLabel.Text = "";
-        //Èç¹ûÊÇÔÚÊäÈë×ó²àÊý×ÖÊ±»ØÍËÒ»¸ñ¼´¿É
-        else if (!MainPage.Source.IsNext)
-            displayLabel.Text = displayLabel.Text.Substring(0, displayLabel.Text.Length - 1);
-        //Èç¹ûÊÇÔÚ¸ÕÊäÈëÔËËã·ûÊ±»Øµ½ÊäÈëÇ°¼´¿É
-        else if (MainPage.Source.IsNext && MainPage.Source.RhsNumberS == "")
-        {
-            displayLabel.Text = displayLabel.Text.Substring(0, displayLabel.Text.Length - 1);
-            MainPage.Source.IsNext = false;
-            MainPage.Source.CurrentOperator = "";
-        }
-        //Èç¹ûÊäÈë¹ýÓÒ²à×Ö·ûÔò»ØÍËÓÒ²à×Ö·û
-        else if (MainPage.Source.IsNext && MainPage.Source.RhsNumberS != "")
-        {
-            displayLabel.Text = displayLabel.Text.Substring(0, displayLabel.Text.Length - 1);
-            MainPage.Source.RhsNumberS = MainPage.Source.RhsNumberS.Substring(0, MainPage.Source.RhsNumberS.Length - 1);
-        }
-    }
+  // ï¿½ï¿½ï¿½ï¿½OnEqualClickedï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÈºÅ°ï¿½Å¥ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
+  private void OnEqualClicked(object sender, EventArgs e)
+  {
+      // ï¿½ï¿½ï¿½ï¿½ï¿½Ç°Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½Õ£ï¿½ï¿½ï¿½Ö´ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ã£¬ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½
+      if (MainPage.Source.IsNext && (MainPage.Source.RhsNumberS != "" || MainPage.Source.CurrentOperator == "!"))
+      {
+          if(MainPage.Source.CurrentOperator != "!")
+          {
+              if (MainPage.Source.RhsNumberS == "ï¿½ï¿½")
+                  MainPage.Source.CurrentNumber = Math.PI;
+              else if (MainPage.Source.RhsNumberS == "e")
+                  MainPage.Source.CurrentNumber = Math.E;
+              else
+                  MainPage.Source.CurrentNumber = double.Parse(MainPage.Source.RhsNumberS);
+          }
+          Calculate();
+          displayLabel.Text = MainPage.Source.LastNumber.ToString();
+          lastNumberS.Text = MainPage.Source.LastNumber.ToString();
+          MainPage.Source.IsResult = true;
+          MainPage.Source.IsNext = false;
+          MainPage.Source.CurrentOperator = "";
+          MainPage.Source.RhsNumberS = "";
+          MainPage.Source.CurrentNumber = 0;
+      }
+  }
 
-    // ¶¨ÒåOnClearClicked·½·¨À´´¦ÀíAC°´Å¥µã»÷ÊÂ¼þ
-    private void OnClearClicked(object sender, EventArgs e)
-    {
-        MainPage.Source.CurrentNumber = 0;
-        MainPage.Source.LastNumber = 0;
-        MainPage.Source.CurrentOperator = "";
-        MainPage.Source.RhsNumberS = "";
-        MainPage.Source.IsNext = false;
-        MainPage.Source.IsResult = false;
-        displayLabel.Text = MainPage.Source.LastNumber.ToString();
-    }
+  // ï¿½ï¿½ï¿½ï¿½OnDeleteClickedï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½Å¥ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
+  private void OnDeleteClicked(object sender, EventArgs e)
+  {
+      //ï¿½ï¿½ï¿½ï¿½Ç½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½Ç¼ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+      if (MainPage.Source.IsResult)
+          displayLabel.Text = "";
+      //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ñ¼´¿ï¿½
+      else if (!MainPage.Source.IsNext)
+          displayLabel.Text = displayLabel.Text.Substring(0, displayLabel.Text.Length - 1);
+      //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½
+      else if (MainPage.Source.IsNext && MainPage.Source.RhsNumberS == "")
+      {
+          displayLabel.Text = displayLabel.Text.Substring(0, displayLabel.Text.Length - 1);
+          MainPage.Source.IsNext = false;
+          MainPage.Source.CurrentOperator = "";
+      }
+      //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò²ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò²ï¿½ï¿½Ö·ï¿½
+      else if (MainPage.Source.IsNext && MainPage.Source.RhsNumberS != "")
+      {
+          displayLabel.Text = displayLabel.Text.Substring(0, displayLabel.Text.Length - 1);
+          MainPage.Source.RhsNumberS = MainPage.Source.RhsNumberS.Substring(0, MainPage.Source.RhsNumberS.Length - 1);
+      }
+  }
 
-    // ¶¨ÒåCalculate·½·¨À´Ö´ÐÐÔËËãÂß¼­
-    private void Calculate()
-    {
-        // ¸ù¾Ýµ±Ç°Ñ¡ÔñµÄÔËËã·û£¬¶ÔÉÏÒ»´Î¼ÆËãµÄ½á¹ûºÍµ±Ç°ÊäÈëµÄÊý×Ö½øÐÐÏàÓ¦µÄÔËËã£¬²¢¸üÐÂÉÏÒ»´Î¼ÆËãµÄ½á¹û
-        switch (MainPage.Source.CurrentOperator)
-        {
-            case "+":
-                MainPage.Source.LastNumber += MainPage.Source.CurrentNumber;
-                break;
-            case "-":
-                MainPage.Source.LastNumber -= MainPage.Source.CurrentNumber;
-                break;
-            case "*":
-                MainPage.Source.LastNumber *= MainPage.Source.CurrentNumber;
-                break;
-            case "/":
-                MainPage.Source.LastNumber /= MainPage.Source.CurrentNumber;
-                break;
-            case "sin":
-                MainPage.Source.LastNumber = Math.Sin(MainPage.Source.CurrentNumber);
-                break;
-            case "cos":
-                MainPage.Source.LastNumber = Math.Cos(MainPage.Source.CurrentNumber);
-                break;
-            case "tan":
-                MainPage.Source.LastNumber = Math.Tan(MainPage.Source.CurrentNumber);
-                break;
-            case "lg":
-                MainPage.Source.LastNumber = Math.Log10(MainPage.Source.CurrentNumber);
-                break;
-            case "ln":
-                MainPage.Source.LastNumber = Math.Log(MainPage.Source.CurrentNumber,Math.E);
-                break;
-            case "¡Ì":
-                MainPage.Source.LastNumber = Math.Sqrt(MainPage.Source.CurrentNumber);
-                break;
-            case "^":
-                MainPage.Source.LastNumber = Math.Pow(MainPage.Source.LastNumber, MainPage.Source.CurrentNumber);
-                break;
-            case "!":
-                MainPage.Source.LastNumber = Gamma(MainPage.Source.LastNumber + 1);
-                break;
-            default:
-                break;
-        }
-        MainPage.Source.LastNumber = Math.Round(MainPage.Source.LastNumber, 4);
-    }
-    //ÉÏÍøËÑµÄGammaº¯ÊýÐ´·¨(´úÌæ½×³Ë)
-    static double[] p = {0.99999999999980993, 676.5203681218851, -1259.1392167224028,
-        771.32342877765313, -176.61502916214059, 12.507343278686905,
-        -0.13857109526572012, 9.9843695780195716e-6, 1.5056327351493116e-7};
-    static int g = 7;
-    double Gamma(double x)
-    {
-        if (x < 0.5)
-            return Math.PI / (Math.Sin(Math.PI * x)) * Gamma(1 - x);
-        x -= 1;
-        double y = p[0];
-        for (var i = 1; i < g + 2; i++)
-            y += p[i] / (x + i);
-        double t = x + g + 0.5;
-        return Math.Sqrt(2 * Math.PI) * (Math.Pow(t, x + 0.5)) * Math.Exp(-t) * y;
-    }
+  // ï¿½ï¿½ï¿½ï¿½OnClearClickedï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ACï¿½ï¿½Å¥ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
+  private void OnClearClicked(object sender, EventArgs e)
+  {
+      MainPage.Source.CurrentNumber = 0;
+      MainPage.Source.LastNumber = 0;
+      MainPage.Source.CurrentOperator = "";
+      MainPage.Source.RhsNumberS = "";
+      MainPage.Source.IsNext = false;
+      MainPage.Source.IsResult = false;
+      displayLabel.Text = MainPage.Source.LastNumber.ToString();
+  }
+
+  // ï¿½ï¿½ï¿½ï¿½Calculateï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß¼ï¿½
+  private void Calculate()
+  {
+      // ï¿½ï¿½ï¿½Ýµï¿½Ç°Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½Î¼ï¿½ï¿½ï¿½Ä½ï¿½ï¿½ï¿½Íµï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ã£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½Î¼ï¿½ï¿½ï¿½Ä½ï¿½ï¿½
+      switch (MainPage.Source.CurrentOperator)
+      {
+          case "+":
+              MainPage.Source.LastNumber += MainPage.Source.CurrentNumber;
+              break;
+          case "-":
+              MainPage.Source.LastNumber -= MainPage.Source.CurrentNumber;
+              break;
+          case "*":
+              MainPage.Source.LastNumber *= MainPage.Source.CurrentNumber;
+              break;
+          case "/":
+              MainPage.Source.LastNumber /= MainPage.Source.CurrentNumber;
+              break;
+          case "sin":
+              MainPage.Source.LastNumber = Math.Sin(MainPage.Source.CurrentNumber);
+              break;
+          case "cos":
+              MainPage.Source.LastNumber = Math.Cos(MainPage.Source.CurrentNumber);
+              break;
+          case "tan":
+              MainPage.Source.LastNumber = Math.Tan(MainPage.Source.CurrentNumber);
+              break;
+          case "lg":
+              MainPage.Source.LastNumber = Math.Log10(MainPage.Source.CurrentNumber);
+              break;
+          case "ln":
+              MainPage.Source.LastNumber = Math.Log(MainPage.Source.CurrentNumber,Math.E);
+              break;
+          case "ï¿½ï¿½":
+              MainPage.Source.LastNumber = Math.Sqrt(MainPage.Source.CurrentNumber);
+              break;
+          case "^":
+              MainPage.Source.LastNumber = Math.Pow(MainPage.Source.LastNumber, MainPage.Source.CurrentNumber);
+              break;
+          case "!":
+              MainPage.Source.LastNumber = Gamma(MainPage.Source.LastNumber + 1);
+              break;
+          default:
+              break;
+      }
+      MainPage.Source.LastNumber = Math.Round(MainPage.Source.LastNumber, 4);
+  }
+  //ï¿½ï¿½ï¿½ï¿½ï¿½Ñµï¿½Gammaï¿½ï¿½ï¿½ï¿½Ð´ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½×³ï¿½)
+  static double[] p = {0.99999999999980993, 676.5203681218851, -1259.1392167224028,
+      771.32342877765313, -176.61502916214059, 12.507343278686905,
+      -0.13857109526572012, 9.9843695780195716e-6, 1.5056327351493116e-7};
+  static int g = 7;
+  double Gamma(double x)
+  {
+      if (x < 0.5)
+          return Math.PI / (Math.Sin(Math.PI * x)) * Gamma(1 - x);
+      x -= 1;
+      double y = p[0];
+      for (var i = 1; i < g + 2; i++)
+          y += p[i] / (x + i);
+      double t = x + g + 0.5;
+      return Math.Sqrt(2 * Math.PI) * (Math.Pow(t, x + 0.5)) * Math.Exp(-t) * y;
+  } 
 }
