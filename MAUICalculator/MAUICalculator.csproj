@@ -63,12 +63,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="SubPage.xaml.cs">
-	    <DependentUpon>SubPage.xaml</DependentUpon>
-	  </Compile>
-	</ItemGroup>
-
-	<ItemGroup>
 	  <MauiXaml Update="SubPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
