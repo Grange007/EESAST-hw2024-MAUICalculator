@@ -144,6 +144,23 @@ public partial class SubPage : ContentPage
         historyLabel.Text = $"{lastNumber} {currentOperator} ";
     }
 
+    private double Gamma(double z)
+    {
+        const int g = 7;
+        double[] p = {0.99999999999980993, 676.5203681218851, -1259.1392167224028,
+                         771.32342877765313, -176.61502916214059, 12.507343278686905,
+                         -0.13857109526572012, 9.9843695780195716e-6, 1.5056327351493116e-7};
+        if (z < 0.5)
+            return Math.PI / (Math.Sin(Math.PI * z) * Gamma(1 - z));
+        z -= 1;
+        double x = p[0];
+        for (var i = 1; i < g + 2; i++)
+            x += p[i] / (z + i);
+        double t = z + g + 0.5;
+        return Math.Sqrt(2 * Math.PI) * (Math.Pow(t, z + 0.5)) * Math.Exp(-t) * x;
+
+    }
+
     // 定义OnUnaryOperatorClicked方法来处理一元运算符按钮点击事件
     private void OnUnaryOperatorClicked(object sender, EventArgs e)
     {
@@ -162,6 +179,9 @@ public partial class SubPage : ContentPage
                 break;
             case "neg":
                 number = -number;
+                break;
+            case "fact":
+                number = Gamma(number + 1);
                 break;
             case "ln":
                 number = Math.Log(number);

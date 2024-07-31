@@ -6,13 +6,19 @@
     <Application.Resources>
         <ResourceDictionary>
 
+            <Color x:Key="ButtonLight">#6FFF</Color>
+            <Color x:Key="ButtonLight2">White</Color>
+            <Color x:Key="ButtonDark">#2777</Color>
+            <Color x:Key="ButtonDark2">#4777</Color>
+            <Color x:Key="EqualDark">#58CEFF</Color>
+            
             <Style TargetType="Button">
-                <Setter Property="Background" Value="#6FFF" />
+                <Setter Property="Background" Value="{AppThemeBinding Light={StaticResource ButtonLight}, Dark={StaticResource ButtonDark}}" />
                 <Setter Property="FontSize" Value="Small" />
             </Style>
 
             <Style TargetType="Button" Class="Number">
-                <Setter Property="Background" Value="White" />
+                <Setter Property="Background" Value="{AppThemeBinding Light={StaticResource ButtonLight2}, Dark={StaticResource ButtonDark2}}" />
             </Style>
 
             <Style TargetType="Button" Class="Operator">
@@ -20,7 +26,7 @@
             </Style>
 
             <Style TargetType="Button" Class="Equal">
-                <Setter Property="Background" Value="{AppThemeBinding Light={StaticResource Magenta}, Dark={StaticResource White}}" />
+                <Setter Property="Background" Value="{AppThemeBinding Light={StaticResource Magenta}, Dark={StaticResource EqualDark}}" />
                 <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource PrimaryDarkText}}" />
                 <Setter Property="FontFamily" Value="NCMMathBook" />
             </Style>

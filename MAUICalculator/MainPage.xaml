@@ -34,8 +34,8 @@
         </VerticalStackLayout>
 
         <!-- 使用Button创建键盘按钮，并占据特定的Grid位置，设置Clicked事件处理程序 -->
-        <Button Text="AC" Clicked="OnClearClicked" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"/>
-        <Button Text="DEL" Clicked="OnDeleteClicked" Grid.Row="1" Grid.Column="2"/>
+        <Button Text="AC" Clicked="OnClearClicked" FontSize="Micro" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"/>
+        <Button Text="DEL" Clicked="OnDeleteClicked" FontSize="Micro" Grid.Row="1" Grid.Column="2"/>
         <Button Text="÷" Clicked="OnOperatorClicked" Grid.Row="1" Grid.Column="3" StyleClass="Operator"/>
 
         <Button Text="7" Clicked="OnNumberClicked" Grid.Row="2" Grid.Column="0" StyleClass="Number"/>

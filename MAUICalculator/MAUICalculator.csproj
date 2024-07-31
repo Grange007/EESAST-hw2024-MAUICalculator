@@ -57,7 +57,6 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\Fonts\NewCMMath-Book-Modified.ttf" />
-	  <None Remove="Resources\Fonts\NewCMMath-Book.ttf" />
 	</ItemGroup>
 
 	<ItemGroup>
