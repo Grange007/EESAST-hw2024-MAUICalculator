@@ -16,7 +16,7 @@ public partial class SubPage : ContentPage
             displayLabel.Text = MainPage.Initial_channel();
             begin = 1;
         }
-        if(begin == 1)
+        else if(begin == 1)
             displayLabel.Text = Channel.text;
     }
     protected override void OnDisappearing()
