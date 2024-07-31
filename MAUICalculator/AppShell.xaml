@@ -5,17 +5,19 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:MAUICalculator"
     Shell.FlyoutBehavior="Disabled"
-    Title="MAUICalculator">
+    Title="MAUICalculator"
+    WidthRequest="420"
+    HeightRequest="540"
+    Shell.TabBarBackgroundColor="Transparent"
+    BackgroundColor="Transparent">
     <TabBar>
-        <Tab Title="Basic Calculator">
+        <Tab Title="Basic">
             <ShellContent
-                Title="Basic Calculator"
                 ContentTemplate="{DataTemplate local:MainPage}"
                 Route="MainPage" />
         </Tab>
-        <Tab Title="Advanced Calculator">
+        <Tab Title="Advanced">
             <ShellContent
-                Title="Advanced Calculator"
                 ContentTemplate="{DataTemplate local:SubPage}"
                 Route="SubPage" />
         </Tab>
