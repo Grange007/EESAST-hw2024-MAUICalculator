@@ -5,6 +5,26 @@
              x:Class="MAUICalculator.App">
     <Application.Resources>
         <ResourceDictionary>
+
+            <Style TargetType="Button">
+                <Setter Property="Background" Value="#6FFF" />
+                <Setter Property="FontSize" Value="Small" />
+            </Style>
+
+            <Style TargetType="Button" Class="Number">
+                <Setter Property="Background" Value="White" />
+            </Style>
+
+            <Style TargetType="Button" Class="Operator">
+                <Setter Property="FontFamily" Value="NCMMathBook" />
+            </Style>
+
+            <Style TargetType="Button" Class="Equal">
+                <Setter Property="Background" Value="{AppThemeBinding Light={StaticResource Magenta}, Dark={StaticResource White}}" />
+                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource PrimaryDarkText}}" />
+                <Setter Property="FontFamily" Value="NCMMathBook" />
+            </Style>
+
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
