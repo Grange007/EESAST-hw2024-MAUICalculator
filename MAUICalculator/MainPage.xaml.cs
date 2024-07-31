@@ -10,12 +10,17 @@
         public static string currentOperator = "";
         public static bool isResult = false;
         public static string text = "0";
+        public static string text_begin = "0";
     }
     public partial class MainPage : ContentPage
     {
         public MainPage()
         {
             InitializeComponent();
+        }
+        public static string Initial_channel()
+        {
+            return Channel.text_begin;
         }
         protected override void OnAppearing()
         {
@@ -47,6 +52,7 @@
 
             // 将数字追加到显示屏，并更新当前输入的数字
             displayLabel.Text += number;
+            Channel.text_begin = displayLabel.Text;
             Channel.currentNumber = double.Parse(displayLabel.Text);
             Channel.flag = 1;
         }
@@ -64,6 +70,7 @@
             {
                 Calculate();
                 displayLabel.Text = Channel.lastNumber.ToString();
+                Channel.text_begin = displayLabel.Text;
                 Channel.isResult = true;
             }
             else
@@ -72,6 +79,7 @@
                 Channel.flag = 0;
                 Channel.lastNumber = Channel.currentNumber;
                 displayLabel.Text = "0";
+                Channel.text_begin = displayLabel.Text;
                 Channel.isResult = false;
             }
 
@@ -88,6 +96,7 @@
             {
                 Calculate();
                 displayLabel.Text = Channel.lastNumber.ToString();
+                Channel.text_begin = displayLabel.Text;
                 Channel.isResult = true;
                 Channel.currentOperator = "";
             }
@@ -101,6 +110,7 @@
             Channel.currentOperator = "";
             Channel.isResult = false;
             displayLabel.Text = Channel.lastNumber.ToString();
+            Channel.text_begin = displayLabel.Text;
         }
 
         // 定义Calculate方法来执行运算逻辑
@@ -140,6 +150,7 @@
                 Channel.currentOperator = "";
             else
                 displayLabel.Text = "0";
+            Channel.text_begin = displayLabel.Text;
         }
     }
 

@@ -3,6 +3,7 @@ namespace MAUICalculator;
 
 public partial class SubPage : ContentPage
 {
+    protected int begin = 0;
     public SubPage()
     {
         InitializeComponent();
@@ -10,7 +11,13 @@ public partial class SubPage : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        displayLabel.Text = Channel.text;
+        if(begin == 0)
+        {
+            displayLabel.Text = MainPage.Initial_channel();
+            begin = 1;
+        }
+        if(begin == 1)
+            displayLabel.Text = Channel.text;
     }
     protected override void OnDisappearing()
     {
