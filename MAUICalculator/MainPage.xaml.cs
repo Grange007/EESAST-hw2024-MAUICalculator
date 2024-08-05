@@ -33,7 +33,27 @@
 
             // 将数字追加到显示屏，并更新当前输入的数字
             displayLabel.Text += number;
-            currentNumber = double.Parse(displayLabel.Text);
+            currentNumber = double.Parse(number);
+        }
+
+        private void OnDelClicked(object sender, EventArgs e)
+        {
+            if(isResult)
+            {// 上一个是 =
+                displayLabel.Text = "";
+                isResult = false;
+                currentNumber = 0;
+            }
+            if(currentOperator != "")
+            { // 输入运算符
+                currentOperator = "";
+                isResult=false;
+            }
+            else
+            { // 输入数字字符
+                currentNumber = 0;
+                isResult = false;
+            }
         }
 
         // 定义OnOperatorClicked方法来处理运算符按钮点击事件
@@ -43,23 +63,22 @@
             var button = sender as Button;
             var op = button.Text;
 
-            // 如果当前的运算符不为空，就执行上一次选择的运算，并显示结果
+            // 如果当前的运算符不为空，就改变运算符号
             if (currentOperator != "")
             {
-                Calculate();
-                displayLabel.Text = lastNumber.ToString();
-                isResult = true;
+                currentOperator = op;
+                displayLabel.Text = lastNumber.ToString() + op;
+                isResult = false;
             }
             else
             {
                 // 否则，就将当前输入的数字赋值给上一次计算的结果
                 lastNumber = currentNumber;
-                displayLabel.Text = "0";
+                currentNumber = 0;
+                displayLabel.Text = lastNumber.ToString() + op;
                 isResult = false;
+                currentOperator = op;
             }
-
-            // 将当前选择的运算符赋值给变量，并清空当前输入的数字
-            currentOperator = op;
         }
 
         // 定义OnEqualClicked方法来处理等号按钮点击事件
