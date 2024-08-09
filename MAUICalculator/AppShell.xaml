@@ -6,18 +6,27 @@
     xmlns:local="clr-namespace:MAUICalculator"
     Shell.FlyoutBehavior="Disabled"
     Title="MAUICalculator">
+    
     <TabBar>
         <Tab Title="Basic Calculator">
             <ShellContent
-                Title="Basic Calculator"
-                ContentTemplate="{DataTemplate local:MainPage}"
-                Route="MainPage" />
+            Title="Basic Calculator"
+            ContentTemplate="{DataTemplate local:MainPage}"
+            Route="MainPage" />
         </Tab>
+
         <Tab Title="Advanced Calculator">
             <ShellContent
-                Title="Advanced Calculator"
-                ContentTemplate="{DataTemplate local:SubPage}"
-                Route="SubPage" />
+            Title="Advanced Calculator"
+            ContentTemplate="{DataTemplate local:SubPage}"
+            Route="SubPage">
+                <ShellContent.BindingContext>
+                    <local:SubPage/>
+                </ShellContent.BindingContext>
+            </ShellContent>
         </Tab>
     </TabBar>
+
+
+
 </Shell>

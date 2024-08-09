@@ -26,7 +26,7 @@
         </Grid.ColumnDefinitions>
 
         <!-- 使用Label显示计算结果，并占据第一行四列 -->
-        <Label x:Name="displayLabel" Text="0" FontSize="Large" HorizontalTextAlignment="End" Grid.Row="0" Grid.ColumnSpan="4" />
+        <Label x:Name="displayLabel" Text="0" FontSize="Large" HorizontalTextAlignment="End" Grid.Row="0" Grid.ColumnSpan="6" />
 
         <!-- 使用Button创建键盘按钮，并占据特定的Grid位置，设置Clicked事件处理程序 -->
         <Button Text="AC" Background="LightSkyBlue" Clicked="OnClearClicked" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"/>

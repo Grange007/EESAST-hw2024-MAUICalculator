@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MAUICalculator.MainPage">
 
+    
     <!-- 使用Grid作为根布局 -->
     <Grid RowSpacing="6" ColumnSpacing="6" Margin="20">
 

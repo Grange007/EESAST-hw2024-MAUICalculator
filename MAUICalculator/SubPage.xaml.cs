@@ -1,12 +1,22 @@
+using Microsoft.Maui.Controls;
+using Microsoft.Maui.Controls.Xaml;
+using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+
 namespace MAUICalculator;
 
-public partial class SubPage : ContentPage
-{
-	public SubPage()
-	{
-		InitializeComponent();
-	}
 
+public partial class SubPage : ContentPage, INotifyPropertyChanged
+{
+    public SubPage()
+    {
+        InitializeComponent();
+        RestoreState();
+    }
 
     // 定义一些变量来存储当前输入的数字，当前选择的运算符，以及上一次计算的结果
     private double currentNumber = 0;
@@ -14,7 +24,19 @@ public partial class SubPage : ContentPage
     private string currentOperator = "";
     private bool isResult = false;
 
-    private long Factorial(int num)
+
+    private void RestoreState()
+    {
+        displayLabel.Text = AppShell.CalculatorState.displaytext;
+        lastNumber = AppShell.CalculatorState.lastnumber;
+    }
+
+    private void SaveState()
+    {
+        AppShell.CalculatorState.displaytext = displayLabel.Text;
+        AppShell.CalculatorState.lastnumber = lastNumber;
+    }
+    private ulong Factorial(uint num)
     {
         if (num == 1)
             return 1;
@@ -41,6 +63,7 @@ public partial class SubPage : ContentPage
         // 将数字追加到显示屏，并更新当前输入的数字
         displayLabel.Text += number;
         currentNumber = double.Parse(displayLabel.Text);
+        SaveState();
     }
 
     private void OnDelClicked(object sender, EventArgs e)
@@ -61,11 +84,13 @@ public partial class SubPage : ContentPage
             currentNumber = 0;
             isResult = false;
         }
+        SaveState();
     }
 
     // 定义OnOperatorClicked方法来处理运算符按钮点击事件
     private void OnOperatorClicked(object sender, EventArgs e)
     {
+        RestoreState();
         // 获取按钮的文本值
         var button = sender as Button;
         var op = button.Text;
@@ -86,6 +111,7 @@ public partial class SubPage : ContentPage
             isResult = false;
             currentOperator = op;
         }
+        SaveState();
     }
 
     // 定义OnEqualClicked方法来处理等号按钮点击事件
@@ -99,6 +125,7 @@ public partial class SubPage : ContentPage
             isResult = true;
             currentOperator = "";
         }
+        SaveState();
     }
 
     // 定义OnEqualClicked方法来处理等号按钮点击事件
@@ -109,11 +136,13 @@ public partial class SubPage : ContentPage
         currentOperator = "";
         isResult = false;
         displayLabel.Text = lastNumber.ToString();
+        SaveState();
     }
 
     // 定义OnFunctionClicked方法处理函数按钮点击时间
     private void OnFunctionClicked(object sender, EventArgs e)
     {
+        RestoreState();
         var button = sender as Button;
         var func = button.Text;
 
@@ -172,7 +201,7 @@ public partial class SubPage : ContentPage
                 case "√x":
                     if(currentNumber < 0)
                     { 
-                        displayLabel.Text = "Negativa numbers can't have square root!";
+                        displayLabel.Text = "Negative numbers can't have square root!";
                         break; 
                     }
                     lastNumber = currentNumber;
@@ -184,7 +213,11 @@ public partial class SubPage : ContentPage
                     int result = 0;
                     if(int.TryParse(currentNumber.ToString(),out result))
                     {
-                        displayLabel.Text = Factorial(result).ToString();
+                        if(result<0)
+                        {
+                            displayLabel.Text = "Negative numbers don't have factorial (Elementary)";
+                        }
+                        displayLabel.Text = Factorial((uint)Math.Abs(result)).ToString();
                         lastNumber = currentNumber;
                         currentNumber = result;
                     }
@@ -195,7 +228,11 @@ public partial class SubPage : ContentPage
                     break;
 
                 case "arcsin x":
-
+                    if (Math.Abs(currentNumber) > 1)
+                    {
+                        displayLabel.Text = "NaN";
+                        break;
+                    }
                     lastNumber = currentNumber;
                     currentNumber = Math.Asin(currentNumber);
                     displayLabel.Text = currentNumber.ToString();
@@ -210,7 +247,7 @@ public partial class SubPage : ContentPage
             }
 
         }
-
+        SaveState();
     }
 
     // 定义Calculate方法来执行运算逻辑
@@ -240,5 +277,6 @@ public partial class SubPage : ContentPage
         }
         lastNumber = Math.Round(lastNumber, 4);
         currentNumber = lastNumber;
+        SaveState();
     }
 }
