@@ -3,10 +3,67 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MAUICalculator.SubPage"
              Title="Advanced Calculator">
-    <VerticalStackLayout>
-        <Label 
-            Text="Implement your advanced calculaor here!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+
+    <Grid RowSpacing="6" ColumnSpacing="6" Margin="20">
+
+        <!-- 设置六行四列的网格 -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- 使用Label显示计算结果，并占据第一行四列 -->
+        <Label x:Name="displayLabel" Text="0" FontSize="Large" HorizontalTextAlignment="End" Grid.Row="0" Grid.ColumnSpan="6" />
+
+        <!-- 使用Button创建键盘按钮，并占据特定的Grid位置，设置Clicked事件处理程序 -->
+        <Button Text="AC" Background="LightSkyBlue" Clicked="OnClearClicked" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"/>
+        <Button Text="DEL" Background="LightSkyBlue" Clicked="OnOperatorClicked" Grid.Row="1" Grid.Column="2"/>
+        <Button Text="/" Background="LightSkyBlue" Clicked="OnOperatorClicked" Grid.Row="1" Grid.Column="3" />
+        <Button Text="x^y" Background="LightSkyBlue" Clicked="OnOperatorClicked" Grid.Row="1" Grid.Column="4" />
+        <Button Text="arcsin x" Background="LightSkyBlue" Clicked="OnFunctionClicked" Grid.Row="1" Grid.Column="5" />
+
+
+        <Button Text="7" Background="LightSkyBlue" Clicked="OnNumberClicked" Grid.Row="2" Grid.Column="0"/>
+        <Button Text="8" Background="LightSkyBlue" Clicked="OnNumberClicked" Grid.Row="2" Grid.Column="1"/>
+        <Button Text="9" Background="LightSkyBlue" Clicked="OnNumberClicked" Grid.Row="2" Grid.Column="2"/>
+        <Button Text="*" Background="LightSkyBlue" Clicked="OnOperatorClicked" Grid.Row="2" Grid.Column="3"/>
+        <Button Text="lg x" Background="LightSkyBlue" Clicked="OnFunctionClicked" Grid.Row="2" Grid.Column="4" />
+        <Button Text="sin x" Background="LightSkyBlue" Clicked="OnFunctionClicked" Grid.Row="2" Grid.Column="5" />
+
+        <Button Text="4" Background="LightSkyBlue" Clicked="OnNumberClicked" Grid.Row="3" Grid.Column="0"/>
+        <Button Text="5" Background="LightSkyBlue" Clicked="OnNumberClicked" Grid.Row="3" Grid.Column="1"/>
+        <Button Text="6" Background="LightSkyBlue" Clicked="OnNumberClicked" Grid.Row="3" Grid.Column="2"/>
+        <Button Text="-" Background="LightSkyBlue" Clicked="OnOperatorClicked" Grid.Row="3" Grid.Column="3"/>
+        <Button Text="ln x" Background="LightSkyBlue" Clicked="OnFunctionClicked" Grid.Row="3" Grid.Column="4" />
+        <Button Text="cos x" Background="LightSkyBlue" Clicked="OnFunctionClicked" Grid.Row="3" Grid.Column="5" />
+
+        <Button Text="1" Background="LightSkyBlue" Clicked="OnNumberClicked" Grid.Row="4" Grid.Column="0"/>
+        <Button Text="2" Background="LightSkyBlue" Clicked="OnNumberClicked" Grid.Row="4" Grid.Column="1"/>
+        <Button Text="3" Background="LightSkyBlue" Clicked="OnNumberClicked" Grid.Row="4" Grid.Column="2"/>
+        <Button Text="+" Background="LightSkyBlue" Clicked="OnOperatorClicked" Grid.Row="4" Grid.Column="3"/>
+        <Button Text="√x" Background="LightSkyBlue" Clicked="OnFunctionClicked" Grid.Row="4" Grid.Column="4" />
+        <Button Text="tan x" Background="LightSkyBlue" Clicked="OnFunctionClicked" Grid.Row="4" Grid.Column="5" />
+
+        <Button Text="0" Background="LightSkyBlue" Clicked="OnNumberClicked" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"/>
+        <Button Text="." Background="LightSkyBlue" Clicked="OnNumberClicked" Grid.Row="5" Grid.Column="2"/>
+        <Button Text="=" Background="LightSkyBlue" Clicked="OnEqualClicked" Grid.Row="5" Grid.Column="3"/>
+        <Button Text="x!" Background="LightSkyBlue" Clicked="OnFunctionClicked" Grid.Row="5" Grid.Column="4" />
+        <Button Text="floor x" Background="LightSkyBlue" Clicked="OnFunctionClicked" Grid.Row="5" Grid.Column="5" />
+
+
+    </Grid>
+
 </ContentPage>
