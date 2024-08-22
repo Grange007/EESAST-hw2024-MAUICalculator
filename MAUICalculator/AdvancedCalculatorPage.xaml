@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Calculator.AdvancedCalculatorPage">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Display Label -->
+        <Label x:Name="displayLabel"
+               Grid.Row="0"
+               HorizontalOptions="FillAndExpand"
+               VerticalOptions="End"
+               FontSize="32"
+               TextColor="Black"
+               BackgroundColor="LightGray"
+               Padding="10"
+               HorizontalTextAlignment="End"
+               VerticalTextAlignment="Center"/>
+
+        <!-- Button Grid -->
+        <Grid Grid.Row="1"
+              ColumnSpacing="10"
+              RowSpacing="10"
+              Padding="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Number Buttons -->
+            <Button Text="7" Grid.Row="0" Grid.Column="0" Clicked="OnNumberClicked" BackgroundColor="#ADD8E6" TextColor="Black" CornerRadius="5" Padding="10"/>
+            <Button Text="8" Grid.Row="0" Grid.Column="1" Clicked="OnNumberClicked" BackgroundColor="#ADD8E6" TextColor="Black" CornerRadius="5" Padding="10"/>
+            <Button Text="9" Grid.Row="0" Grid.Column="2" Clicked="OnNumberClicked" BackgroundColor="#ADD8E6" TextColor="Black" CornerRadius="5" Padding="10"/>
+            <Button Text="/" Grid.Row="0" Grid.Column="3" Clicked="OnOperatorClicked" BackgroundColor="#ADD8E6" TextColor="Black" CornerRadius="5" Padding="10"/>
+
+            <Button Text="4" Grid.Row="1" Grid.Column="0" Clicked="OnNumberClicked" BackgroundColor="#ADD8E6" TextColor="Black" CornerRadius="5" Padding="10"/>
+            <Button Text="5" Grid.Row="1" Grid.Column="1" Clicked="OnNumberClicked" BackgroundColor="#ADD8E6" TextColor="Black" CornerRadius="5" Padding="10"/>
+            <Button Text="6" Grid.Row="1" Grid.Column="2" Clicked="OnNumberClicked" BackgroundColor="#ADD8E6" TextColor="Black" CornerRadius="5" Padding="10"/>
+            <Button Text="*" Grid.Row="1" Grid.Column="3" Clicked="OnOperatorClicked" BackgroundColor="#ADD8E6" TextColor="Black" CornerRadius="5" Padding="10"/>
+
+            <Button Text="1" Grid.Row="2" Grid.Column="0" Clicked="OnNumberClicked" BackgroundColor="#ADD8E6" TextColor="Black" CornerRadius="5" Padding="10"/>
+            <Button Text="2" Grid.Row="2" Grid.Column="1" Clicked="OnNumberClicked" BackgroundColor="#ADD8E6" TextColor="Black" CornerRadius="5" Padding="10"/>
+            <Button Text="3" Grid.Row="2" Grid.Column="2" Clicked="OnNumberClicked" BackgroundColor="#ADD8E6" TextColor="Black" CornerRadius="5" Padding="10"/>
+            <Button Text="-" Grid.Row="2" Grid.Column="3" Clicked="OnOperatorClicked" BackgroundColor="#ADD8E6" TextColor="Black" CornerRadius="5" Padding="10"/>
+
+            <Button Text="0" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Clicked="OnNumberClicked" BackgroundColor="#ADD8E6" TextColor="Black" CornerRadius="5" Padding="10"/>
+            <Button Text="." Grid.Row="3" Grid.Column="2" Clicked="OnDotClicked" BackgroundColor="#ADD8E6" TextColor="Black" CornerRadius="5" Padding="10"/>
+            <Button Text="+" Grid.Row="3" Grid.Column="3" Clicked="OnOperatorClicked" BackgroundColor="#ADD8E6" TextColor="Black" CornerRadius="5" Padding="10"/>
+
+            <!-- Additional Buttons -->
+            <Button Text="AC" Grid.Row="4" Grid.Column="0" Clicked="OnACClicked" BackgroundColor="#ADD8E6" TextColor="Black" CornerRadius="5" Padding="10"/>
+            <Button Text="DEL" Grid.Row="4" Grid.Column="1" Clicked="OnDELClicked" BackgroundColor="#ADD8E6" TextColor="Black" CornerRadius="5" Padding="10"/>
+            <Button Text="=" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Clicked="OnEqualsClicked" BackgroundColor="#ADD8E6" TextColor="Black" CornerRadius="5" Padding="10"/>
+
+            <!-- Advanced Operations -->
+            <Button Text="lg" Grid.Row="5" Grid.Column="0" Clicked="OnAdvancedOperatorClicked" BackgroundColor="#ADD8E6" TextColor="Black" CornerRadius="5" Padding="10"/>
+            <Button Text="sqrt" Grid.Row="5" Grid.Column="1" Clicked="OnAdvancedOperatorClicked" BackgroundColor="#ADD8E6" TextColor="Black" CornerRadius="5" Padding="10"/>
+            <Button Text="!" Grid.Row="5" Grid.Column="2" Clicked="OnAdvancedOperatorClicked" BackgroundColor="#ADD8E6" TextColor="Black" CornerRadius="5" Padding="10"/>
+            <Button Text="π" Grid.Row="5" Grid.Column="3" Clicked="OnAdvancedOperatorClicked" BackgroundColor="#ADD8E6" TextColor="Black" CornerRadius="5" Padding="10"/>
+        </Grid>
+    </Grid>
+</ContentPage>

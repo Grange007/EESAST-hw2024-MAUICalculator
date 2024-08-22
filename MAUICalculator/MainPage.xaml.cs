@@ -1,114 +1,129 @@
-﻿namespace MAUICalculator
+using System;
+using Microsoft.Maui.Controls;
+
+namespace Calculator
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
+        private string _currentInput = string.Empty;
+        private string _lastNumber = string.Empty;
+        private string _lastOperator = string.Empty;
+        private bool _isLastInputOperator = false;
 
         public MainPage()
         {
             InitializeComponent();
         }
 
-        // 定义一些变量来存储当前输入的数字，当前选择的运算符，以及上一次计算的结果
-        private double currentNumber = 0;
-        private double lastNumber = 0;
-        private string currentOperator = "";
-        private bool isResult = false;
+        private void OnACClicked(object sender, EventArgs e)
+        {
+            _currentInput = string.Empty;
+            _lastNumber = string.Empty;
+            _lastOperator = string.Empty;
+            _isLastInputOperator = false;
+            displayLabel.Text = "0";
+        }
 
-        // 定义OnNumberClicked方法来处理数字按钮点击事件
+        private void OnDELClicked(object sender, EventArgs e)
+        {
+            if (_currentInput.Length > 0)
+            {
+                _currentInput = _currentInput.Substring(0, _currentInput.Length - 1);
+                if (_currentInput.Length == 0)
+                {
+                    displayLabel.Text = "0";
+                }
+                else
+                {
+                    displayLabel.Text = _currentInput;
+                }
+            }
+            else if (_lastNumber.Length > 0)
+            {
+                _lastNumber = string.Empty;
+                displayLabel.Text = "0";
+            }
+        }
+
+        private void OnDotClicked(object sender, EventArgs e)
+        {
+            if (!_currentInput.Contains("."))
+            {
+                _currentInput += ".";
+                displayLabel.Text = _currentInput;
+            }
+        }
+
         private void OnNumberClicked(object sender, EventArgs e)
         {
-            // 获取按钮的文本值
             var button = sender as Button;
-            var number = button.Text;
-
-            // 如果当前显示的是结果，或者是0，就清空显示屏
-            if (isResult || displayLabel.Text == "0")
+            if (button != null)
             {
-                displayLabel.Text = "";
-                if (number == ".")
-                    displayLabel.Text = "0";
-                isResult = false;
+                _currentInput += button.Text;
+                displayLabel.Text = _currentInput;
+                _isLastInputOperator = false;
             }
-
-            // 将数字追加到显示屏，并更新当前输入的数字
-            displayLabel.Text += number;
-            currentNumber = double.Parse(displayLabel.Text);
         }
 
-        // 定义OnOperatorClicked方法来处理运算符按钮点击事件
         private void OnOperatorClicked(object sender, EventArgs e)
         {
-            // 获取按钮的文本值
             var button = sender as Button;
-            var op = button.Text;
-
-            // 如果当前的运算符不为空，就执行上一次选择的运算，并显示结果
-            if (currentOperator != "")
+            if (button != null)
             {
-                Calculate();
-                displayLabel.Text = lastNumber.ToString();
-                isResult = true;
-            }
-            else
-            {
-                // 否则，就将当前输入的数字赋值给上一次计算的结果
-                lastNumber = currentNumber;
-                displayLabel.Text = "0";
-                isResult = false;
-            }
+                if (_isLastInputOperator)
+                {
+                    _lastOperator = button.Text;
+                }
+                else
+                {
+                    if (_lastNumber != string.Empty && _currentInput != string.Empty)
+                    {
+                        CalculateResult();
+                    }
 
-            // 将当前选择的运算符赋值给变量，并清空当前输入的数字
-            currentOperator = op;
-        }
-
-        // 定义OnEqualClicked方法来处理等号按钮点击事件
-        private void OnEqualClicked(object sender, EventArgs e)
-        {
-            // 如果当前选择的运算符不为空，就执行上一次选择的运算，并显示结果
-            if (currentOperator != "")
-            {
-                Calculate();
-                displayLabel.Text = lastNumber.ToString();
-                isResult = true;
-                currentOperator = "";
+                    _lastNumber = _currentInput;
+                    _currentInput = string.Empty;
+                    _lastOperator = button.Text;
+                    _isLastInputOperator = true;
+                }
             }
         }
 
-        // 定义OnEqualClicked方法来处理等号按钮点击事件
-        private void OnClearClicked(object sender, EventArgs e)
+        private void OnEqualsClicked(object sender, EventArgs e)
         {
-            currentNumber = 0;
-            lastNumber = 0;
-            currentOperator = "";
-            isResult = false;
-            displayLabel.Text = lastNumber.ToString();
+            if (_lastNumber != string.Empty && _currentInput != string.Empty && _lastOperator != string.Empty)
+            {
+                CalculateResult();
+                _lastNumber = string.Empty;
+                _lastOperator = string.Empty;
+                _isLastInputOperator = false;
+            }
         }
 
-        // 定义Calculate方法来执行运算逻辑
-        private void Calculate()
+        private void CalculateResult()
         {
-            // 根据当前选择的运算符，对上一次计算的结果和当前输入的数字进行相应的运算，并更新上一次计算的结果
-            switch (currentOperator)
+            double num1 = double.Parse(_lastNumber);
+            double num2 = double.Parse(_currentInput);
+            double result = 0;
+
+            switch (_lastOperator)
             {
                 case "+":
-                    lastNumber += currentNumber;
+                    result = num1 + num2;
                     break;
                 case "-":
-                    lastNumber -= currentNumber;
+                    result = num1 - num2;
                     break;
                 case "*":
-                    lastNumber *= currentNumber;
+                    result = num1 * num2;
                     break;
                 case "/":
-                    lastNumber /= currentNumber;
-                    break;
-                default:
+                    result = num1 / num2;
                     break;
             }
-            lastNumber = Math.Round(lastNumber, 4);
-            currentNumber = lastNumber;
+
+            _currentInput = result.ToString();
+            displayLabel.Text = _currentInput;
         }
     }
-
 }

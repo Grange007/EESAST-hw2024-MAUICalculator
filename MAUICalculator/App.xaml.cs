@@ -1,4 +1,4 @@
-﻿namespace MAUICalculator
+namespace Calculator
 {
     public partial class App : Application
     {
