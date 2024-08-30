@@ -1,12 +1,54 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MAUICalculator.SubPage"
-             Title="Advanced Calculator">
-    <VerticalStackLayout>
-        <Label 
-            Text="Implement your advanced calculaor here!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             x:Class="MAUICalculator.SubPage">
+
+    <Grid RowSpacing="6" ColumnSpacing="6" Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Display Label -->
+        <Label x:Name="displayLabel" Grid.Row="0" Grid.ColumnSpan="4" Text="0" FontSize="36" HorizontalOptions="End" VerticalOptions="Center" />
+
+        <!-- Scientific Functions -->
+        <Button Text="x^y" Grid.Row="1" Grid.Column="0" Clicked="OnPowerClicked" />
+        <Button Text="√x" Grid.Row="1" Grid.Column="1" Clicked="OnSqrtClicked" />
+        <Button Text="lg(x)" Grid.Row="1" Grid.Column="2" Clicked="OnLogClicked" />
+        <Button Text="ln(x)" Grid.Row="1" Grid.Column="3" Clicked="OnLnClicked" />
+
+        <!-- Trigonometric Functions -->
+        <Button Text="sin" Grid.Row="2" Grid.Column="0" Clicked="OnSinClicked" />
+        <Button Text="cos" Grid.Row="2" Grid.Column="1" Clicked="OnCosClicked" />
+        <Button Text="tan" Grid.Row="2" Grid.Column="2" Clicked="OnTanClicked" />
+        <Button Text="x!" Grid.Row="2" Grid.Column="3" Clicked="OnFactorialClicked" />
+
+        <!-- Constants -->
+        <Button Text="π" Grid.Row="3" Grid.Column="0" Clicked="OnPiClicked" />
+        <Button Text="e" Grid.Row="3" Grid.Column="1" Clicked="OnEClicked" />
+
+        <!-- Add basic operations as well -->
+        <Button Text="+" Grid.Row="4" Grid.Column="0" Clicked="OnOperatorClicked" />
+        <Button Text="-" Grid.Row="4" Grid.Column="1" Clicked="OnOperatorClicked" />
+        <Button Text="*" Grid.Row="4" Grid.Column="2" Clicked="OnOperatorClicked" />
+        <Button Text="/" Grid.Row="4" Grid.Column="3" Clicked="OnOperatorClicked" />
+
+        <!-- Clear, Delete, Equals -->
+        <Button Text="DEL" Grid.Row="5" Grid.Column="0" Clicked="OnDelClicked" />
+        <Button Text="AC" Grid.Row="5" Grid.Column="1" Clicked="OnClearClicked" />
+        <Button Text="=" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" Clicked="OnEqualClicked" />
+
+    </Grid>
 </ContentPage>
