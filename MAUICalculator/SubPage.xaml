@@ -3,10 +3,55 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MAUICalculator.SubPage"
              Title="Advanced Calculator">
-    <VerticalStackLayout>
-        <Label 
-            Text="Implement your advanced calculaor here!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+
+    <Grid RowSpacing="0" ColumnSpacing="0" Padding="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Display label -->
+        <Label x:Name="displayLabel" Text="0" FontSize="Large" HorizontalTextAlignment="End" VerticalOptions="Center" Grid.Row="0" Grid.ColumnSpan="4" />
+
+        <!-- Function buttons -->
+        <Grid Grid.Row="1" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Row 1 -->
+            <Button Text="x^y" Background="LightSkyBlue" Clicked="OnComplexOperatorClicked" Grid.Row="0" Grid.Column="0" Margin="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+            <Button Text="sqrt" Background="LightSkyBlue" Clicked="OnComplexOperatorClicked" Grid.Row="0" Grid.Column="1" Margin="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+            <Button Text="lg" Background="LightSkyBlue" Clicked="OnComplexOperatorClicked" Grid.Row="0" Grid.Column="2" Margin="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+            <Button Text="ln" Background="LightSkyBlue" Clicked="OnComplexOperatorClicked" Grid.Row="0" Grid.Column="3" Margin="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+
+            <!-- Row 2 -->
+            <Button Text="sin" Background="LightSkyBlue" Clicked="OnComplexOperatorClicked" Grid.Row="1" Grid.Column="0" Margin="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+            <Button Text="cos" Background="LightSkyBlue" Clicked="OnComplexOperatorClicked" Grid.Row="1" Grid.Column="1" Margin="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+            <Button Text="tan" Background="LightSkyBlue" Clicked="OnComplexOperatorClicked" Grid.Row="1" Grid.Column="2" Margin="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+            <Button Text="pi" Background="LightSkyBlue" Clicked="OnComplexNumberClicked" Grid.Row="1" Grid.Column="3" Margin="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+
+            <!-- Row 3 -->
+            <Button Text="e" Background="LightSkyBlue" Clicked="OnComplexNumberClicked" Grid.Row="2" Grid.Column="0" Margin="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+            <Button Text="!" Background="LightSkyBlue" Clicked="OnComplexOperatorClicked" Grid.Row="2" Grid.Column="1" Margin="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+            <Button Text="0" Background="LightSkyBlue" Clicked="OnNumberClicked" Grid.Row="2" Grid.Column="2" Margin="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+            <Button Text="=" Background="LightSkyBlue" Clicked="OnEqualClicked" Grid.Row="2" Grid.Column="3" Margin="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+
+            <!-- Row 4 -->
+            <Button Text="AC" Background="LightSkyBlue" Clicked="OnClearClicked" Grid.Row="3" Grid.Column="0" Margin="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+            <Button Text="DEL" Background="LightSkyBlue" Clicked="OnDeleteClicked" Grid.Row="3" Grid.Column="1" Margin="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+            <Button Text="+" Background="LightSkyBlue" Clicked="OnOperatorClicked" Grid.Row="3" Grid.Column="2" Margin="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+            <Button Text="-" Background="LightSkyBlue" Clicked="OnOperatorClicked" Grid.Row="3" Grid.Column="3" Margin="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+        </Grid>
+    </Grid>
 </ContentPage>

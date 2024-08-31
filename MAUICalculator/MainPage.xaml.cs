@@ -1,114 +1,132 @@
-﻿namespace MAUICalculator
+using System;
+using Microsoft.Maui.Controls;
+
+namespace MAUICalculator
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
-
         public MainPage()
         {
             InitializeComponent();
+            LoadState();
         }
 
-        // 定义一些变量来存储当前输入的数字，当前选择的运算符，以及上一次计算的结果
-        private double currentNumber = 0;
-        private double lastNumber = 0;
-        private string currentOperator = "";
-        private bool isResult = false;
+        private void LoadState()
+        {
+            var state = CalculatorState.Instance;
+            displayLabel.Text = state.IsResult ? state.LastNumber.ToString() : state.CurrentNumber.ToString();
+        }
 
-        // 定义OnNumberClicked方法来处理数字按钮点击事件
+        private void OnDeleteClicked(object sender, EventArgs e)
+        {
+            var state = CalculatorState.Instance;
+            if (state.IsResult) displayLabel.Text = "";
+            else
+            {
+                if (state.CurrentOperator != "")
+                {
+                    state.CurrentOperator = "";
+                    displayLabel.Text = state.LastNumber.ToString();
+                }
+                else
+                {
+                    displayLabel.Text = displayLabel.Text.Remove(displayLabel.Text.Length - 1);
+                    if (displayLabel.Text == "") displayLabel.Text += "0";
+                    state.CurrentNumber = double.Parse(displayLabel.Text);
+                }
+            }
+        }
+
         private void OnNumberClicked(object sender, EventArgs e)
         {
-            // 获取按钮的文本值
             var button = sender as Button;
             var number = button.Text;
+            var state = CalculatorState.Instance;
 
-            // 如果当前显示的是结果，或者是0，就清空显示屏
-            if (isResult || displayLabel.Text == "0")
+            if (state.IsResult || displayLabel.Text == "0")
             {
                 displayLabel.Text = "";
                 if (number == ".")
                     displayLabel.Text = "0";
-                isResult = false;
+                state.IsResult = false;
             }
 
-            // 将数字追加到显示屏，并更新当前输入的数字
             displayLabel.Text += number;
-            currentNumber = double.Parse(displayLabel.Text);
+            state.CurrentNumber = double.Parse(displayLabel.Text);
         }
 
-        // 定义OnOperatorClicked方法来处理运算符按钮点击事件
         private void OnOperatorClicked(object sender, EventArgs e)
         {
-            // 获取按钮的文本值
             var button = sender as Button;
             var op = button.Text;
+            var state = CalculatorState.Instance;
 
-            // 如果当前的运算符不为空，就执行上一次选择的运算，并显示结果
-            if (currentOperator != "")
+            if (state.CurrentOperator != "")
             {
-                Calculate();
-                displayLabel.Text = lastNumber.ToString();
-                isResult = true;
+                if (!state.IsResult)
+                {
+                    Calculate();
+                    displayLabel.Text = state.LastNumber.ToString();
+                    state.IsResult = true;
+                }
             }
             else
             {
-                // 否则，就将当前输入的数字赋值给上一次计算的结果
-                lastNumber = currentNumber;
+                state.LastNumber = state.CurrentNumber;
                 displayLabel.Text = "0";
-                isResult = false;
+                state.IsResult = false;
             }
 
-            // 将当前选择的运算符赋值给变量，并清空当前输入的数字
-            currentOperator = op;
+            state.CurrentOperator = op;
         }
 
-        // 定义OnEqualClicked方法来处理等号按钮点击事件
         private void OnEqualClicked(object sender, EventArgs e)
         {
-            // 如果当前选择的运算符不为空，就执行上一次选择的运算，并显示结果
-            if (currentOperator != "")
+            var state = CalculatorState.Instance;
+            if (state.CurrentOperator != "")
             {
                 Calculate();
-                displayLabel.Text = lastNumber.ToString();
-                isResult = true;
-                currentOperator = "";
+                displayLabel.Text = state.LastNumber.ToString();
+                state.CurrentOperator = "";
+                state.IsResult = true;
             }
         }
 
-        // 定义OnEqualClicked方法来处理等号按钮点击事件
         private void OnClearClicked(object sender, EventArgs e)
         {
-            currentNumber = 0;
-            lastNumber = 0;
-            currentOperator = "";
-            isResult = false;
-            displayLabel.Text = lastNumber.ToString();
+            var state = CalculatorState.Instance;
+            state.CurrentNumber = 0;
+            state.LastNumber = 0;
+            state.CurrentOperator = "";
+            state.IsResult = false;
+            displayLabel.Text = state.LastNumber.ToString();
         }
 
-        // 定义Calculate方法来执行运算逻辑
         private void Calculate()
         {
-            // 根据当前选择的运算符，对上一次计算的结果和当前输入的数字进行相应的运算，并更新上一次计算的结果
-            switch (currentOperator)
+            var state = CalculatorState.Instance;
+            switch (state.CurrentOperator)
             {
                 case "+":
-                    lastNumber += currentNumber;
+                    state.LastNumber += state.CurrentNumber;
                     break;
                 case "-":
-                    lastNumber -= currentNumber;
+                    state.LastNumber -= state.CurrentNumber;
                     break;
                 case "*":
-                    lastNumber *= currentNumber;
+                    state.LastNumber *= state.CurrentNumber;
                     break;
                 case "/":
-                    lastNumber /= currentNumber;
-                    break;
-                default:
+                    state.LastNumber /= state.CurrentNumber;
                     break;
             }
-            lastNumber = Math.Round(lastNumber, 4);
-            currentNumber = lastNumber;
+            state.LastNumber = Math.Round(state.LastNumber, 4);
+            state.CurrentNumber = state.LastNumber;
+        }
+
+        private async void OnNavigateToComplexModeClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new SubPage());
         }
     }
-
 }
